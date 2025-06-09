@@ -13,25 +13,18 @@ export function Footer() {
           </div>
           <div className="flex items-center space-x-6">
             <Link
-              href="https://github.com/yourusername"
+              href="https://github.com/Chris24george"
               className="text-neutral-500 hover:text-black dark:text-neutral-400 dark:hover:text-white transition-colors"
             >
               <Github className="h-5 w-5" />
               <span className="sr-only">GitHub</span>
             </Link>
             <Link
-              href="https://linkedin.com/in/yourusername"
+              href="https://www.linkedin.com/in/chris24george/"
               className="text-neutral-500 hover:text-black dark:text-neutral-400 dark:hover:text-white transition-colors"
             >
               <Linkedin className="h-5 w-5" />
               <span className="sr-only">LinkedIn</span>
-            </Link>
-            <Link
-              href="mailto:chris24george@gmail.com"
-              className="text-neutral-500 hover:text-black dark:text-neutral-400 dark:hover:text-white transition-colors"
-            >
-              <Mail className="h-5 w-5" />
-              <span className="sr-only">Email</span>
             </Link>
           </div>
         </div>

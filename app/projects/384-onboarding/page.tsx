@@ -4,9 +4,16 @@ import { useEffect, useRef } from "react"
 import Link from "next/link"
 import { Button } from "@/components/ui/button"
 import { Badge } from "@/components/ui/badge"
-import { ArrowLeft } from "lucide-react"
+import { ArrowLeft, ExternalLink } from "lucide-react"
+import { getProject } from "@/lib/projects"
+import { Breadcrumb } from "@/components/breadcrumb"
 
 export default function OnboardingCaseStudy() {
+  const project = getProject("384-onboarding")
+  
+  if (!project) {
+    return <div>Project not found</div>
+  }
   // Refs for scroll animations
   const headerRef = useRef<HTMLDivElement>(null)
   const contentRef = useRef<HTMLDivElement>(null)
@@ -40,26 +47,52 @@ export default function OnboardingCaseStudy() {
     <div className="pt-24 pb-16 md:py-32 relative">
       <div className="absolute inset-0 bg-dot-pattern opacity-50 -z-10" />
       <div className="container max-w-4xl relative z-10">
-        {/* Back Button */}
-        <Button variant="ghost" asChild className="mb-8 group hover:bg-primary/10">
-          <Link href="/projects">
-            <ArrowLeft className="mr-2 h-4 w-4 transition-transform group-hover:-translate-x-1" />
-            Back to Projects
-          </Link>
-        </Button>
+        {/* Breadcrumb */}
+        <Breadcrumb 
+          items={[
+            { label: "Home", href: "/" },
+            { label: "Projects", href: "/projects" },
+            { label: project.title }
+          ]}
+          className="mb-8"
+        />
 
         {/* Header */}
         <div ref={headerRef} className="mb-12 opacity-0">
-          <div className="flex flex-wrap gap-2 mb-4">
-            <Badge className="bg-primary/10 text-primary border-primary/20">Lit.dev</Badge>
-            <Badge className="bg-primary/10 text-primary border-primary/20">Web Components</Badge>
-            <Badge className="bg-primary/10 text-primary border-primary/20">TypeScript</Badge>
-            <Badge className="bg-primary/10 text-primary border-primary/20">Wireframing</Badge>
+          <div className="flex flex-wrap gap-2 mb-6">
+            {project.tags.map((tag) => (
+              <Badge key={tag} className="bg-primary/10 text-primary border-primary/20">
+                {tag}
+              </Badge>
+            ))}
           </div>
-          <h1 className="text-4xl md:text-5xl font-bold tracking-tight mb-4">384.dev Onboarding</h1>
-          <p className="text-xl text-muted-foreground">
-            Led product definition and UI development for a streamlined developer onboarding experience
-          </p>
+          <div className="flex flex-col md:flex-row md:items-start md:justify-between gap-6 mb-6">
+            <div className="flex-1">
+              <h1 className="text-4xl md:text-5xl font-bold tracking-tight mb-4">{project.title}</h1>
+              <p className="text-xl text-muted-foreground mb-4">
+                {project.longDescription}
+              </p>
+              <div className="flex items-center gap-4 text-sm text-muted-foreground">
+                <span className="font-medium">{project.role}</span>
+                <span>•</span>
+                <span>{project.year}</span>
+              </div>
+            </div>
+            <div className="flex gap-3">
+              <Button variant="outline" asChild>
+                <Link href={project.demoVideoUrl || "#"} target="_blank">
+                  <ExternalLink className="mr-2 h-4 w-4" />
+                  Demo Video
+                </Link>
+              </Button>
+              <Button variant="ghost" asChild className="group hover:bg-primary/10">
+                <Link href="/projects">
+                  <ArrowLeft className="mr-2 h-4 w-4 transition-transform group-hover:-translate-x-1" />
+                  Back to Projects
+                </Link>
+              </Button>
+            </div>
+          </div>
         </div>
 
         {/* Case Study Content */}

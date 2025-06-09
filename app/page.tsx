@@ -6,35 +6,10 @@ import Image from "next/image"
 import { Button } from "@/components/ui/button"
 import { Badge } from "@/components/ui/badge"
 import { Download, ExternalLink, ArrowRight, Github, Linkedin, Mail } from "lucide-react"
+import { getFeaturedProjects } from "@/lib/projects"
 
 export default function HomePage() {
-  const projects = [
-    {
-      title: "384.dev Onboarding",
-      description:
-        "Engineered primary user onboarding and core functionality, coding frontend myself with progressive disclosure UI.",
-      image: "/placeholder.svg?height=400&width=600",
-      href: "/projects/384-onboarding",
-      tags: ["Lit.dev", "Web Components", "Product Strategy"],
-      role: "Technical Product Manager / Software Engineer",
-    },
-    {
-      title: "384snap iOS App",
-      description: "Led end-to-end product definition from roadmap and core UX to hands-on UI development in SwiftUI.",
-      image: "/placeholder.svg?height=400&width=600",
-      href: "/projects/384snap",
-      tags: ["SwiftUI", "Product Development", "iOS"],
-      role: "Technical Product Manager / Software Engineer",
-    },
-    {
-      title: "Interactive Whitepaper",
-      description: "Developed a Vue.js interactive whitepaper that showcased the SDK and impressed investors.",
-      image: "/placeholder.svg?height=400&width=600",
-      href: "/projects/interactive-whitepaper",
-      tags: ["Vue.js", "TypeScript", "Technical Writing"],
-      role: "Technical Product Manager / Software Engineer",
-    },
-  ]
+  const projects = getFeaturedProjects()
 
   const skills = {
     technical: ["Node.js", "TypeScript", "React", "Python", "SwiftUI", "Vue.js"],
@@ -81,29 +56,13 @@ export default function HomePage() {
             <p className="text-xl text-muted-foreground max-w-2xl mx-auto mb-8">
               Technical Product Manager | Software Engineer | UX Advocate
             </p>
-            <div className="flex flex-col sm:flex-row gap-4 justify-center mb-8">
-              <Button asChild size="lg" className="rounded-full px-8">
-                <Link href="#" download>
-                  <Download className="mr-2 h-4 w-4" />
-                  Download Resume
-                </Link>
-              </Button>
-              <Button variant="outline" size="lg" asChild className="rounded-full px-8">
-                <Link href="https://linkedin.com/in/yourusername" target="_blank">
-                  <ExternalLink className="mr-2 h-4 w-4" />
-                  LinkedIn
-                </Link>
-              </Button>
-            </div>
+
             <div className="flex items-center justify-center space-x-6 text-muted-foreground">
-              <Link href="https://github.com/yourusername" className="hover:text-primary transition-colors">
+              <Link href="https://github.com/Chris24george" className="hover:text-primary transition-colors">
                 <Github className="h-5 w-5" />
               </Link>
-              <Link href="https://linkedin.com/in/yourusername" className="hover:text-primary transition-colors">
+              <Link href="https://www.linkedin.com/in/chris24george/" className="hover:text-primary transition-colors">
                 <Linkedin className="h-5 w-5" />
-              </Link>
-              <Link href="mailto:chris24george@gmail.com" className="hover:text-primary transition-colors">
-                <Mail className="h-5 w-5" />
               </Link>
             </div>
           </section>
@@ -173,43 +132,34 @@ export default function HomePage() {
                 </Link>
               </Button>
             </div>
-            <div className="space-y-8">
+            <div className="space-y-6">
               {projects.map((project) => (
-                <div key={project.title} className="border-b border-border last:border-0 pb-8 last:pb-0">
-                  <div className="flex flex-col md:flex-row gap-6">
-                    <div className="md:w-1/3">
-                      <div className="aspect-video rounded-lg overflow-hidden">
-                        <Image
-                          src={project.image || "/placeholder.svg"}
-                          alt={project.title}
-                          width={400}
-                          height={225}
-                          className="w-full h-full object-cover"
-                        />
+                <div key={project.title} className="group relative">
+                  <Link href={project.href} className="block p-6 rounded-xl border border-border/50 bg-card/30 backdrop-blur-sm hover:bg-card/50 hover:border-border transition-all duration-300 cursor-pointer">
+                    <div className="flex justify-between items-start mb-4">
+                      <div className="flex-1">
+                        <h3 className="text-xl font-semibold mb-2 group-hover:text-primary transition-colors">{project.title}</h3>
+                        <p className="text-sm font-medium text-primary/80 mb-3">{project.role}</p>
                       </div>
-                    </div>
-                    <div className="md:w-2/3">
-                      <div className="flex justify-between items-start mb-3">
-                        <div>
-                          <h3 className="text-lg font-semibold mb-1">{project.title}</h3>
-                          <p className="text-sm text-muted-foreground mb-2">{project.role}</p>
-                        </div>
-                        <Button variant="ghost" size="sm" asChild>
-                          <Link href={project.href}>
-                            <ArrowRight className="h-4 w-4" />
+                      <div className="flex items-center gap-2 ml-4">
+                        <Button variant="outline" size="sm" asChild className="hover:bg-primary hover:text-primary-foreground" onClick={(e) => e.stopPropagation()}>
+                          <Link href={project.demoVideoUrl || "#"} target="_blank">
+                            <ExternalLink className="mr-2 h-4 w-4" />
+                            Demo Video
                           </Link>
                         </Button>
-                      </div>
-                      <p className="text-muted-foreground mb-4">{project.description}</p>
-                      <div className="flex flex-wrap gap-2">
-                        {project.tags.map((tag) => (
-                          <Badge key={tag} variant="outline" className="text-xs bg-primary/10 border-primary/20">
-                            {tag}
-                          </Badge>
-                        ))}
+                        <ArrowRight className="h-4 w-4 text-muted-foreground group-hover:text-primary transition-colors" />
                       </div>
                     </div>
-                  </div>
+                    <p className="text-muted-foreground mb-5 leading-relaxed">{project.description}</p>
+                    <div className="flex flex-wrap gap-2">
+                      {project.tags.map((tag) => (
+                        <Badge key={tag} variant="secondary" className="text-xs font-medium bg-primary/10 hover:bg-primary/20 transition-colors">
+                          {tag}
+                        </Badge>
+                      ))}
+                    </div>
+                  </Link>
                 </div>
               ))}
             </div>
