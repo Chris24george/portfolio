@@ -44,7 +44,7 @@ export default function HomePage() {
   }, [])
 
   return (
-    <div className="pt-10 pb-8 md:py-16 relative">
+    <div className="pt-20 pb-8 md:pt-24 md:pb-16 relative">
       <div className="absolute inset-0 bg-dot-pattern opacity-50 -z-10" />
       <div className="container max-w-4xl">
         <div ref={contentRef} className="space-y-12 opacity-0">
