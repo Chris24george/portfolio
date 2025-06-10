@@ -2,11 +2,19 @@
 
 import { useEffect, useRef } from "react"
 import Link from "next/link"
+import Image from "next/image"
 import { Button } from "@/components/ui/button"
 import { Badge } from "@/components/ui/badge"
 import { ArrowLeft, ExternalLink } from "lucide-react"
 import { getProject } from "@/lib/projects"
 import { Breadcrumb } from "@/components/breadcrumb"
+import {
+  Carousel,
+  CarouselContent,
+  CarouselItem,
+  CarouselNext,
+  CarouselPrevious,
+} from "@/components/ui/carousel"
 
 export default function OnboardingCaseStudy() {
   const project = getProject("384-onboarding")
@@ -44,7 +52,7 @@ export default function OnboardingCaseStudy() {
   }, [])
 
   return (
-    <div className="pt-24 pb-16 md:py-32 relative">
+    <div className="pt-24 pb-16 md:pt-32 md:pb-24 relative">
       <div className="absolute inset-0 bg-dot-pattern opacity-50 -z-10" />
       <div className="container max-w-4xl relative z-10">
         {/* Breadcrumb */}
@@ -59,149 +67,147 @@ export default function OnboardingCaseStudy() {
 
         {/* Header */}
         <div ref={headerRef} className="mb-12 opacity-0">
-          <div className="flex flex-wrap gap-2 mb-6">
+          <div className="flex flex-wrap gap-2 mb-4">
             {project.tags.map((tag) => (
               <Badge key={tag} className="bg-primary/10 text-primary border-primary/20">
                 {tag}
               </Badge>
             ))}
           </div>
-          <div className="flex flex-col md:flex-row md:items-start md:justify-between gap-6 mb-6">
-            <div className="flex-1">
-              <h1 className="text-4xl md:text-5xl font-bold tracking-tight mb-4">{project.title}</h1>
-              <p className="text-xl text-muted-foreground mb-4">
-                {project.longDescription}
-              </p>
-              <div className="flex items-center gap-4 text-sm text-muted-foreground">
-                <span className="font-medium">{project.role}</span>
-                <span>•</span>
-                <span>{project.year}</span>
-              </div>
-            </div>
-            <div className="flex gap-3">
-              <Button variant="outline" asChild>
-                <Link href={project.demoVideoUrl || "#"} target="_blank">
-                  <ExternalLink className="mr-2 h-4 w-4" />
-                  Demo Video
-                </Link>
-              </Button>
-              <Button variant="ghost" asChild className="group hover:bg-primary/10">
-                <Link href="/projects">
-                  <ArrowLeft className="mr-2 h-4 w-4 transition-transform group-hover:-translate-x-1" />
-                  Back to Projects
-                </Link>
-              </Button>
-            </div>
+          <h1 className="text-4xl md:text-5xl font-bold tracking-tight mb-4">{project.title}</h1>
+          <p className="text-xl text-muted-foreground mb-2">
+            {project.longDescription}
+          </p>
+          <div className="flex items-center gap-4 text-sm text-muted-foreground mb-4">
+            <span className="font-medium">{project.role}</span>
+            <span>•</span>
+            <span>{project.year}</span>
+          </div>
+          <div className="flex flex-row gap-3">
+            <Button asChild className="bg-purple-600 hover:bg-purple-700 text-white">
+              <Link href={project.demoVideoUrl || "#"} target="_blank">
+                <ExternalLink className="mr-2 h-4 w-4" />
+                Demo Video
+              </Link>
+            </Button>
+            <Button variant="ghost" asChild className="group hover:bg-primary/10">
+              <Link href="/projects">
+                <ArrowLeft className="mr-2 h-4 w-4 transition-transform group-hover:-translate-x-1" />
+                Back to Projects
+              </Link>
+            </Button>
           </div>
         </div>
 
+        {/* Project Screenshots Carousel */}
+        <div className="mb-12">
+          <Carousel className="w-full">
+            <CarouselContent>
+              <CarouselItem>
+                <div className="relative aspect-[4/3] rounded-xl overflow-hidden border border-border bg-muted/50">
+                  <Image
+                    src="/images/os384-loader-screenshot.png"
+                    alt="os384 Loader Interface - Initial loading state"
+                    fill
+                    className="object-contain"
+                    priority
+                  />
+                </div>
+              </CarouselItem>
+              <CarouselItem>
+                <div className="relative aspect-[4/3] rounded-xl overflow-hidden border border-border bg-muted/50">
+                  <Image
+                    src="/images/os384-loader-screenshot-2.png"
+                    alt="os384 Loader Interface - Progressive disclosure in action"
+                    fill
+                    className="object-contain"
+                  />
+                </div>
+              </CarouselItem>
+              <CarouselItem>
+                <div className="relative aspect-[4/3] rounded-xl overflow-hidden border border-border bg-muted/50">
+                  <Image
+                    src="/images/os384-loader-screenshot-3.png"
+                    alt="os384 Loader Interface - Vault creation workflow"
+                    fill
+                    className="object-contain"
+                  />
+                </div>
+              </CarouselItem>
+              <CarouselItem>
+                <div className="relative aspect-[4/3] rounded-xl overflow-hidden border border-border bg-muted/50">
+                  <Image
+                    src="/images/os384-loader-screenshot-4.png"
+                    alt="os384 Loader Interface - Completed onboarding experience"
+                    fill
+                    className="object-contain"
+                  />
+                </div>
+              </CarouselItem>
+            </CarouselContent>
+            <CarouselPrevious />
+            <CarouselNext />
+          </Carousel>
+          <p className="text-sm text-muted-foreground mt-3 text-center">
+            The redesigned os384 loader interface showcasing the progressive disclosure UI and streamlined onboarding flow
+          </p>
+        </div>
+
         {/* Case Study Content */}
-        <div ref={contentRef} className="space-y-12 opacity-0">
-          {/* Challenge */}
-          <section className="glass-card rounded-2xl p-8 md:p-10">
-            <h2 className="text-2xl font-semibold mb-6">The Challenge</h2>
+        <div ref={contentRef} className="space-y-8 opacity-0">
+          <section>
+            <h2 className="text-2xl font-semibold mb-4">The challenge</h2>
             <div className="space-y-4 text-muted-foreground">
               <p>
-                To completely revamp how customers were onboarded onto our system and given access to their storage
-                vaults. The previous UX was clunky and had unnecessary dependencies that created friction in the user
-                experience.
-              </p>
-              <p>
-                This wasn't about building something new from scratch – it was about identifying and removing complexity
-                from an existing product to create a more streamlined, intuitive experience.
+                To completely revamp how customers were onboarded onto our system and given access to their storage vaults. The previous UX was clunky and had unnecessary dependencies.
               </p>
             </div>
           </section>
 
-          {/* My Role */}
-          <section className="glass-card rounded-2xl p-8 md:p-10">
-            <h2 className="text-2xl font-semibold mb-6">My Role</h2>
-            <p className="text-muted-foreground mb-4">
-              I wore two distinct hats for this project, requiring me to balance strategic thinking with hands-on
-              technical execution.
-            </p>
-            <ul className="space-y-3 text-muted-foreground">
-              <li className="flex items-start">
-                <span className="text-primary mr-2 text-lg">•</span>
-                <span>
-                  <strong className="text-foreground">Product Manager:</strong> Defined objectives and key results,
-                  identified what needed to be simplified and removed from the existing flow
-                </span>
-              </li>
-              <li className="flex items-start">
-                <span className="text-primary mr-2 text-lg">•</span>
-                <span>
-                  <strong className="text-foreground">Frontend Engineer:</strong> As the only available engineer, I
-                  re-architected the entire onboarding system using my technical skills and experience
-                </span>
-              </li>
+          <section>
+            <h2 className="text-2xl font-semibold mb-4">My role</h2>
+            <div className="space-y-4 text-muted-foreground">
+              <p>
+                I wore two hats for this role. The first hat was that of Product Manager. I needed to define what our objectives were and what the key results would be to get us where we needed.  The second hat was that of Front End Engineer. I was the only one available to actually re-architect this. So I needed to use my technical skills and experience.
+              </p>
+            </div>
+          </section>
+
+          <section>
+            <h2 className="text-2xl font-semibold mb-4">The process</h2>
+            <ul className="space-y-4 text-muted-foreground list-disc pl-6">
+              <li>A bit different than other projects. My role here was to get rid of unnecessary complexity in an existing product, not iterate on one from scratch.</li>
+              <li>Removed all Shoelace UI components, remade basic funcitonal Lit components that cut down bundle size.</li>
+              <li>Made the vault creation process a progressive disclosure UI that took you visually down on the same page through the process step by step, this reduced confusion as to where you were in the process and allowed you to go undo actions more easily.</li>
             </ul>
           </section>
 
-          {/* Process */}
-          <section className="glass-card rounded-2xl p-8 md:p-10">
-            <h2 className="text-2xl font-semibold mb-6">The Process</h2>
-            <div className="space-y-4 text-muted-foreground">
-              <p className="mb-6">
-                This project was different from others – my role was to eliminate unnecessary complexity in an existing
-                product, not iterate on one from scratch.
-              </p>
-              <ul className="space-y-4">
-                <li className="flex items-start">
-                  <span className="text-primary mr-2 text-lg">•</span>
-                  <span>
-                    <strong className="text-foreground">Component Optimization:</strong> Removed all Shoelace UI
-                    components and rebuilt basic functional Lit components that significantly cut down bundle size
-                  </span>
-                </li>
-                <li className="flex items-start">
-                  <span className="text-primary mr-2 text-lg">•</span>
-                  <span>
-                    <strong className="text-foreground">Progressive Disclosure:</strong> Redesigned the vault creation
-                    process as a progressive disclosure UI that guides users visually down the same page through each
-                    step
-                  </span>
-                </li>
-                <li className="flex items-start">
-                  <span className="text-primary mr-2 text-lg">•</span>
-                  <span>
-                    <strong className="text-foreground">Improved Navigation:</strong> This approach reduced confusion
-                    about process location and allowed users to easily undo actions
-                  </span>
-                </li>
-              </ul>
-            </div>
+          <section>
+            <h2 className="text-2xl font-semibold mb-4">Tech stack/skills used</h2>
+            <ul className="space-y-2 text-muted-foreground list-disc pl-6">
+              <li>Lit.dev, Web Components, Typescript</li>
+              <li>Wireframing, fast iteration</li>
+            </ul>
           </section>
 
-          {/* Outcome */}
-          <section className="glass-card rounded-2xl p-8 md:p-10">
-            <h2 className="text-2xl font-semibold mb-6">Outcome & Impact</h2>
-            <div className="space-y-6">
-              <div className="space-y-4 text-muted-foreground">
-                <div className="flex items-start">
-                  <span className="text-primary mr-2 text-lg">•</span>
-                  <span>
-                    <strong className="text-foreground">Intuitive Flow:</strong> Created a much more intuitive flow for
-                    creating a vault, eliminating user confusion and friction
-                  </span>
-                </div>
-                <div className="flex items-start">
-                  <span className="text-primary mr-2 text-lg">•</span>
-                  <span>
-                    <strong className="text-foreground">Cleaner Interface:</strong> Delivered a cleaner, less cluttered
-                    UI for managing storage in your vault
-                  </span>
-                </div>
-                <div className="flex items-start">
-                  <span className="text-primary mr-2 text-lg">•</span>
-                  <span>
-                    <strong className="text-foreground">Investor Validation:</strong> Received positive investor
-                    feedback on the improved user experience and simplified architecture
-                  </span>
-                </div>
-              </div>
-            </div>
+          <section>
+            <h2 className="text-2xl font-semibold mb-4">Outcome/impact</h2>
+            <ul className="space-y-2 text-muted-foreground list-disc pl-6">
+              <li>Much more intuitive flow for creating a vault</li>
+              <li>Cleaner, less cluttered UI for managing your storage in your vault</li>
+              <li>Positive investor feedback</li>
+            </ul>
           </section>
+        </div>
+
+        {/* CTA */}
+        <div className="mt-16 text-center">
+          <Button asChild size="lg" className="rounded-full px-8 shadow-lg">
+            <Link href="/projects">
+              Explore More Projects
+              <ExternalLink className="ml-2 h-4 w-4" />
+            </Link>
+          </Button>
         </div>
       </div>
     </div>

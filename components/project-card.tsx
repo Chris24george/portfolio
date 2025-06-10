@@ -1,7 +1,6 @@
 "use client"
 
 import { useState } from "react"
-import Image from "next/image"
 import Link from "next/link"
 import { Badge } from "@/components/ui/badge"
 import { ArrowUpRight } from "lucide-react"
@@ -9,13 +8,13 @@ import { ArrowUpRight } from "lucide-react"
 interface ProjectCardProps {
   title: string
   description: string
-  image: string
   href: string
   tags: string[]
-  featured?: boolean
+  role?: string
+  year?: string
 }
 
-export function ProjectCard({ title, description, image, href, tags, featured = false }: ProjectCardProps) {
+export function ProjectCard({ title, description, href, tags, role, year }: ProjectCardProps) {
   const [isHovered, setIsHovered] = useState(false)
 
   return (
@@ -25,50 +24,47 @@ export function ProjectCard({ title, description, image, href, tags, featured = 
       onMouseEnter={() => setIsHovered(true)}
       onMouseLeave={() => setIsHovered(false)}
     >
-      <div className="glass-card rounded-2xl overflow-hidden transition-all duration-300 hover:shadow-lg hover:-translate-y-1">
-        <div className="relative overflow-hidden aspect-[16/9]">
-          <Image
-            src={image || "/placeholder.svg"}
-            alt={title}
-            width={600}
-            height={400}
-            className={`object-cover w-full h-full transition-transform duration-700 ${
-              isHovered ? "scale-105" : "scale-100"
-            }`}
-          />
-          <div className="absolute inset-0 bg-black/40 transition-opacity duration-300" />
-
-          <div className="absolute inset-0 p-6 flex flex-col justify-between">
-            <div className="flex justify-between items-start">
-              {featured && (
-                <Badge variant="secondary" className="bg-white/90 text-black">
-                  Featured
-                </Badge>
-              )}
-              <ArrowUpRight
-                className={`h-5 w-5 text-white transition-all duration-300 ${
-                  isHovered ? "opacity-100 translate-x-0" : "opacity-0 -translate-x-2"
-                }`}
-              />
-            </div>
-
-            <div>
-              <h3 className="text-xl font-semibold text-white mb-2">{title}</h3>
-              <p className="text-sm text-white/90 line-clamp-2 mb-3">{description}</p>
-              <div className="flex flex-wrap gap-2">
-                {tags.slice(0, 3).map((tag) => (
-                  <Badge key={tag} variant="outline" className="bg-white/20 text-white border-white/30 text-xs">
-                    {tag}
-                  </Badge>
-                ))}
-                {tags.length > 3 && (
-                  <Badge variant="outline" className="bg-white/20 text-white border-white/30 text-xs">
-                    +{tags.length - 3}
-                  </Badge>
-                )}
+      <div className="bg-card border border-border rounded-2xl p-6 md:p-8 transition-all duration-300 hover:shadow-xl hover:border-border hover:bg-background group-hover:-translate-y-1">
+        {/* Header */}
+        <div className="flex items-start justify-between mb-4">
+          <div className="flex-1">
+            <h3 className="text-xl md:text-2xl font-bold text-foreground group-hover:text-primary transition-colors mb-2 leading-tight">
+              {title}
+            </h3>
+            {(role || year) && (
+              <div className="flex items-center gap-2 text-sm text-foreground/70 font-medium">
+                {role && <span>{role}</span>}
+                {role && year && <span>•</span>}
+                {year && <span>{year}</span>}
               </div>
+            )}
+          </div>
+          <div className={`ml-4 transition-all duration-300 ${
+            isHovered ? "opacity-100 translate-x-0" : "opacity-70 translate-x-1"
+          }`}>
+            <div className="bg-muted group-hover:bg-primary/10 rounded-full p-2.5 transition-colors">
+              <ArrowUpRight className="h-4 w-4 text-foreground/60 group-hover:text-primary transition-colors" />
             </div>
           </div>
+        </div>
+
+        {/* Description */}
+        <p className="text-foreground/80 leading-relaxed mb-6 line-clamp-3 text-base">
+          {description}
+        </p>
+
+        {/* Tags */}
+        <div className="flex flex-wrap gap-2">
+          {tags.slice(0, 5).map((tag) => (
+            <Badge key={tag} variant="outline" className="bg-primary/10 border-primary/20">
+              {tag}
+            </Badge>
+          ))}
+          {tags.length > 5 && (
+            <Badge variant="outline" className="bg-primary/10 border-primary/20">
+              +{tags.length - 5}
+            </Badge>
+          )}
         </div>
       </div>
     </Link>

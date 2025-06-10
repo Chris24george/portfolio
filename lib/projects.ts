@@ -13,20 +13,8 @@ export interface Project {
 
 export const projects: Project[] = [
   {
-    id: "384-onboarding",
-    title: "384.dev Onboarding",
-    description: "Engineered primary user onboarding and core functionality, coding frontend myself with progressive disclosure UI.",
-    longDescription: "Led product definition and UI development for a streamlined developer onboarding experience that completely revamped how customers were onboarded onto our system and given access to their storage vaults.",
-    role: "Technical Product Manager / Software Engineer",
-    year: "2024",
-    tags: ["Lit.dev", "Web Components", "Product Strategy", "TypeScript", "Wireframing"],
-    href: "/projects/384-onboarding",
-    demoVideoUrl: "#",
-    featured: true,
-  },
-  {
     id: "384snap",
-    title: "384snap iOS App",
+    title: "384 Snap",
     description: "Led end-to-end product definition from roadmap and core UX to hands-on UI development in SwiftUI.",
     longDescription: "Led end-to-end product definition from roadmap and core UX to hands-on UI development in SwiftUI, achieving feature-complete build for iOS storage management.",
     role: "Technical Product Manager / Software Engineer",
@@ -34,6 +22,18 @@ export const projects: Project[] = [
     tags: ["SwiftUI", "Product Development", "iOS"],
     href: "/projects/384snap",
     demoVideoUrl: "#",
+    featured: true,
+  },
+  {
+    id: "384-onboarding",
+    title: "os384 Loader",
+    description: "Engineered primary user onboarding and core functionality, coding frontend myself with progressive disclosure UI.",
+    longDescription: "Led product definition and UI development for a streamlined developer onboarding experience that completely revamped how customers were onboarded onto our system and given access to their storage vaults.",
+    role: "Technical Product Manager / Software Engineer",
+    year: "2024",
+    tags: ["Lit.dev", "Web Components", "Product Strategy", "TypeScript", "Wireframing"],
+    href: "/projects/384-onboarding",
+    demoVideoUrl: "https://www.loom.com/share/8923cae25bd049fdabe35f7627cd75f2",
     featured: true,
   },
   {
@@ -45,7 +45,7 @@ export const projects: Project[] = [
     year: "2024",
     tags: ["Vue.js", "TypeScript", "Technical Writing"],
     href: "/projects/interactive-whitepaper",
-    demoVideoUrl: "#",
+    demoVideoUrl: "https://www.loom.com/share/18f0f5f4683c4a209ab58c0ffc97aaf3",
     featured: true,
   },
 ]

@@ -7,6 +7,7 @@ import { Button } from "@/components/ui/button"
 import { Badge } from "@/components/ui/badge"
 import { Download, ExternalLink, ArrowRight, Github, Linkedin, Mail } from "lucide-react"
 import { getFeaturedProjects } from "@/lib/projects"
+import { ProjectCard } from "@/components/project-card"
 
 export default function HomePage() {
   const projects = getFeaturedProjects()
@@ -43,17 +44,17 @@ export default function HomePage() {
   }, [])
 
   return (
-    <div className="pt-24 pb-16 md:py-32 relative">
+    <div className="pt-10 pb-8 md:py-16 relative">
       <div className="absolute inset-0 bg-dot-pattern opacity-50 -z-10" />
       <div className="container max-w-4xl">
-        <div ref={contentRef} className="space-y-16 opacity-0">
+        <div ref={contentRef} className="space-y-12 opacity-0">
           {/* Header */}
           <section className="text-center">
-            <div className="relative w-32 h-32 mx-auto mb-8 rounded-full overflow-hidden ring-4 ring-primary/20">
+            <div className="relative w-32 h-32 mx-auto mb-6 rounded-full overflow-hidden ring-4 ring-primary/20">
               <Image src="/images/headshot.jpeg" alt="Christopher George" fill className="object-cover" />
             </div>
-            <h1 className="text-4xl md:text-5xl font-bold tracking-tight mb-4">Christopher George</h1>
-            <p className="text-xl text-muted-foreground max-w-2xl mx-auto mb-8">
+            <h1 className="text-4xl md:text-5xl font-bold tracking-tight mb-2">Christopher George</h1>
+            <p className="text-xl text-muted-foreground max-w-2xl mx-auto mb-4">
               Technical Product Manager | Software Engineer | UX Advocate
             </p>
 
@@ -68,9 +69,9 @@ export default function HomePage() {
           </section>
 
           {/* About */}
-          <section className="glass-card rounded-2xl p-8 md:p-10">
-            <h2 className="text-2xl font-semibold mb-6">About</h2>
-            <div className="space-y-4 text-muted-foreground">
+          <section>
+            <h2 className="text-2xl font-semibold mb-4">About</h2>
+            <div className="space-y-2 text-muted-foreground">
               <p>
                 Technical Product Manager who bridges engineering and product to rapidly develop impactful, user-focused
                 software. Adept at translating ambiguous, emerging-tech problems into clear roadmaps, OKRs, and
@@ -85,11 +86,11 @@ export default function HomePage() {
           </section>
 
           {/* Skills */}
-          <section className="glass-card rounded-2xl p-8 md:p-10">
-            <h2 className="text-2xl font-semibold mb-8">Skills</h2>
-            <div className="grid md:grid-cols-3 gap-8">
+          <section>
+            <h2 className="text-2xl font-semibold mb-4">Skills</h2>
+            <div className="grid md:grid-cols-3 gap-4">
               <div>
-                <h3 className="text-lg font-medium mb-4">Technical</h3>
+                <h3 className="text-lg font-medium mb-2">Technical</h3>
                 <div className="flex flex-wrap gap-2">
                   {skills.technical.map((skill) => (
                     <Badge key={skill} variant="outline" className="bg-primary/10 border-primary/20">
@@ -99,7 +100,7 @@ export default function HomePage() {
                 </div>
               </div>
               <div>
-                <h3 className="text-lg font-medium mb-4">Product Management</h3>
+                <h3 className="text-lg font-medium mb-2">Product Management</h3>
                 <div className="flex flex-wrap gap-2">
                   {skills.product.map((skill) => (
                     <Badge key={skill} variant="outline" className="bg-primary/10 border-primary/20">
@@ -109,7 +110,7 @@ export default function HomePage() {
                 </div>
               </div>
               <div>
-                <h3 className="text-lg font-medium mb-4">Design & Tools</h3>
+                <h3 className="text-lg font-medium mb-2">Design & Tools</h3>
                 <div className="flex flex-wrap gap-2">
                   {skills.design.map((skill) => (
                     <Badge key={skill} variant="outline" className="bg-primary/10 border-primary/20">
@@ -122,8 +123,8 @@ export default function HomePage() {
           </section>
 
           {/* Projects */}
-          <section className="glass-card rounded-2xl p-8 md:p-10">
-            <div className="flex justify-between items-center mb-8">
+          <section>
+            <div className="flex justify-between items-center mb-4">
               <h2 className="text-2xl font-semibold">Featured Projects</h2>
               <Button variant="outline" asChild>
                 <Link href="/projects">
@@ -132,35 +133,16 @@ export default function HomePage() {
                 </Link>
               </Button>
             </div>
-            <div className="space-y-6">
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
               {projects.map((project) => (
-                <div key={project.title} className="group relative">
-                  <Link href={project.href} className="block p-6 rounded-xl border border-border/50 bg-card/30 backdrop-blur-sm hover:bg-card/50 hover:border-border transition-all duration-300 cursor-pointer">
-                    <div className="flex justify-between items-start mb-4">
-                      <div className="flex-1">
-                        <h3 className="text-xl font-semibold mb-2 group-hover:text-primary transition-colors">{project.title}</h3>
-                        <p className="text-sm font-medium text-primary/80 mb-3">{project.role}</p>
-                      </div>
-                      <div className="flex items-center gap-2 ml-4">
-                        <Button variant="outline" size="sm" asChild className="hover:bg-primary hover:text-primary-foreground" onClick={(e) => e.stopPropagation()}>
-                          <Link href={project.demoVideoUrl || "#"} target="_blank">
-                            <ExternalLink className="mr-2 h-4 w-4" />
-                            Demo Video
-                          </Link>
-                        </Button>
-                        <ArrowRight className="h-4 w-4 text-muted-foreground group-hover:text-primary transition-colors" />
-                      </div>
-                    </div>
-                    <p className="text-muted-foreground mb-5 leading-relaxed">{project.description}</p>
-                    <div className="flex flex-wrap gap-2">
-                      {project.tags.map((tag) => (
-                        <Badge key={tag} variant="secondary" className="text-xs font-medium bg-primary/10 hover:bg-primary/20 transition-colors">
-                          {tag}
-                        </Badge>
-                      ))}
-                    </div>
-                  </Link>
-                </div>
+                <ProjectCard
+                  key={project.title}
+                  title={project.title}
+                  description={project.description}
+                  href={project.href}
+                  tags={project.tags}
+                  role={project.role}
+                />
               ))}
             </div>
           </section>
