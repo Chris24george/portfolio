@@ -12,10 +12,10 @@ const jakarta = Plus_Jakarta_Sans({
 })
 
 export const metadata: Metadata = {
-  title: "Christopher George - Technical Product Manager",
+  title: "Christopher George - Product & Solutions",
   description:
-    "Technical Product Manager who bridges engineering and product to rapidly develop impactful, user-focused software",
-    generator: 'v0.dev'
+    "Product leader and solutions engineer: builds user-focused software, credible demos/POCs, and clear narratives that drive adoption.",
+  generator: 'v0.dev'
 }
 
 export default function RootLayout({

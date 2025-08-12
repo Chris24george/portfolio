@@ -44,7 +44,7 @@ export default function ProjectsPage() {
           <div className="text-center mb-12">
             <h1 className="text-4xl md:text-5xl font-bold tracking-tight mb-4">Projects</h1>
             <p className="text-xl text-muted-foreground">
-              Case studies showcasing my approach to bridging engineering and product
+              Selected work spanning product, solutions engineering, and product specialist domains
             </p>
           </div>
 
@@ -57,7 +57,6 @@ export default function ProjectsPage() {
                 description={project.longDescription}
                 href={project.href}
                 tags={project.tags}
-                role={project.role}
                 year={project.year}
               />
             ))}

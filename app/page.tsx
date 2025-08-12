@@ -1,11 +1,10 @@
 "use client"
 
-import { useEffect, useRef } from "react"
 import Link from "next/link"
 import Image from "next/image"
 import { Button } from "@/components/ui/button"
 import { Badge } from "@/components/ui/badge"
-import { Download, ExternalLink, ArrowRight, Github, Linkedin, Mail } from "lucide-react"
+import { ArrowRight, Github, Linkedin } from "lucide-react"
 import { getFeaturedProjects } from "@/lib/projects"
 import { ProjectCard } from "@/components/project-card"
 
@@ -15,49 +14,24 @@ export default function HomePage() {
   const skills = {
     technical: ["Node.js", "TypeScript", "React", "Python", "SwiftUI", "Vue.js"],
     product: ["Agile/Scrum", "Roadmapping", "User Research", "Competitive Analysis", "UX Reviews"],
-    design: ["Figma", "Canva", "Framer", "Cursor", "ElevenLabs"],
+    enablement: ["Demo Craft", "Solution Design", "Integrations", "Technical Writing", "Documentation", "Onboarding"],
   }
-
-  const contentRef = useRef<HTMLDivElement>(null)
-
-  useEffect(() => {
-    const observer = new IntersectionObserver(
-      (entries) => {
-        entries.forEach((entry) => {
-          if (entry.isIntersecting) {
-            entry.target.classList.add("animate-in")
-          }
-        })
-      },
-      { threshold: 0.1 },
-    )
-
-    if (contentRef.current) {
-      observer.observe(contentRef.current)
-    }
-
-    return () => {
-      if (contentRef.current) {
-        observer.unobserve(contentRef.current)
-      }
-    }
-  }, [])
 
   return (
     <div className="pt-20 pb-8 md:pt-24 md:pb-16 relative">
       <div className="absolute inset-0 bg-dot-pattern opacity-50 -z-10" />
       <div className="container max-w-4xl">
-        <div ref={contentRef} className="space-y-12 opacity-0">
+        <div className="space-y-12">
           {/* Header */}
           <section className="text-center">
             <div className="relative w-32 h-32 mx-auto mb-6 rounded-full overflow-hidden ring-4 ring-primary/20">
               <Image src="/images/headshot.jpeg" alt="Christopher George" fill className="object-cover" />
             </div>
             <h1 className="text-4xl md:text-5xl font-bold tracking-tight mb-2">Christopher George</h1>
-            <p className="text-xl text-muted-foreground max-w-2xl mx-auto mb-4">
-              Technical Product Manager | Software Engineer | UX Advocate
+            <p className="text-xl text-muted-foreground max-w-2xl mx-auto mb-6">
+              I build and ship products end‑to‑end—clarity from ambiguity, credible demos/POCs, and hands‑on code when it
+              moves the work forward.
             </p>
-
             <div className="flex items-center justify-center space-x-6 text-muted-foreground">
               <Link href="https://github.com/Chris24george" className="hover:text-primary transition-colors">
                 <Github className="h-5 w-5" />
@@ -73,14 +47,13 @@ export default function HomePage() {
             <h2 className="text-2xl font-semibold mb-4">About</h2>
             <div className="space-y-2 text-muted-foreground">
               <p>
-                Technical Product Manager who bridges engineering and product to rapidly develop impactful, user-focused
-                software. Adept at translating ambiguous, emerging-tech problems into clear roadmaps, OKRs, and
-                well-defined features ready for development.
+                I’m a product professional with strong technical fluency who turns ambiguity into shipped outcomes. I work
+                closely with engineering, customers, and go‑to‑market teams to align problems, scope solutions, and deliver
+                value.
               </p>
               <p>
-                My hands-on coding background enables deep collaboration with engineers and credible trade-off calls. I
-                have a proven record leading mobile and web teams, refining UX with user research, and managing full
-                product lifecycles in high-velocity agile environments.
+                Strengths include crisp roadmaps and execution, discovery and user research, demo‑ready POCs, integration‑
+                minded solution design, and clear documentation and enablement that drive adoption and time‑to‑value.
               </p>
             </div>
           </section>
@@ -100,7 +73,7 @@ export default function HomePage() {
                 </div>
               </div>
               <div>
-                <h3 className="text-lg font-medium mb-2">Product Management</h3>
+                <h3 className="text-lg font-medium mb-2">Product</h3>
                 <div className="flex flex-wrap gap-2">
                   {skills.product.map((skill) => (
                     <Badge key={skill} variant="outline" className="bg-primary/10 border-primary/20">
@@ -110,9 +83,9 @@ export default function HomePage() {
                 </div>
               </div>
               <div>
-                <h3 className="text-lg font-medium mb-2">Design & Tools</h3>
+                <h3 className="text-lg font-medium mb-2">Enablement & Demos</h3>
                 <div className="flex flex-wrap gap-2">
-                  {skills.design.map((skill) => (
+                  {skills.enablement.map((skill) => (
                     <Badge key={skill} variant="outline" className="bg-primary/10 border-primary/20">
                       {skill}
                     </Badge>
@@ -141,7 +114,6 @@ export default function HomePage() {
                   description={project.description}
                   href={project.href}
                   tags={project.tags}
-                  role={project.role}
                 />
               ))}
             </div>

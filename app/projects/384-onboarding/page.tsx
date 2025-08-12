@@ -79,8 +79,6 @@ export default function OnboardingCaseStudy() {
             {project.longDescription}
           </p>
           <div className="flex items-center gap-4 text-sm text-muted-foreground mb-4">
-            <span className="font-medium">{project.role}</span>
-            <span>•</span>
             <span>{project.year}</span>
           </div>
           <div className="flex flex-row gap-3">

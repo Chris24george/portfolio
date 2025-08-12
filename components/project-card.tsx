@@ -10,11 +10,10 @@ interface ProjectCardProps {
   description: string
   href: string
   tags: string[]
-  role?: string
   year?: string
 }
 
-export function ProjectCard({ title, description, href, tags, role, year }: ProjectCardProps) {
+export function ProjectCard({ title, description, href, tags, year }: ProjectCardProps) {
   const [isHovered, setIsHovered] = useState(false)
 
   return (
@@ -31,11 +30,9 @@ export function ProjectCard({ title, description, href, tags, role, year }: Proj
             <h3 className="text-xl md:text-2xl font-bold text-foreground group-hover:text-primary transition-colors mb-2 leading-tight">
               {title}
             </h3>
-            {(role || year) && (
+            {year && (
               <div className="flex items-center gap-2 text-sm text-foreground/70 font-medium">
-                {role && <span>{role}</span>}
-                {role && year && <span>•</span>}
-                {year && <span>{year}</span>}
+                <span>{year}</span>
               </div>
             )}
           </div>
