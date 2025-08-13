@@ -12,9 +12,41 @@ export default function HomePage() {
   const projects = getFeaturedProjects()
 
   const skills = {
-    technical: ["Node.js", "TypeScript", "React", "Python", "SwiftUI", "Vue.js"],
-    product: ["Agile/Scrum", "Roadmapping", "User Research", "Competitive Analysis", "UX Reviews"],
-    enablement: ["Demo Craft", "Solution Design", "Integrations", "Technical Writing", "Documentation", "Onboarding"],
+    technical: [
+      "Node.js",
+      "TypeScript",
+      "React",
+      "Python",
+      "SwiftUI",
+      "SQL",
+      "Next.js",
+      "Flask",
+      "Vue",
+      "REST APIs",
+      "Git",
+      "GitHub",
+      "HTML5/CSS",
+      "Web Components (Lit)",
+      "SDK integration",
+    ],
+    product: [
+      "Agile/Scrum",
+      "Roadmapping",
+      "Backlog Management",
+      "Stakeholder Communication",
+      "User Research",
+      "Competitive Analysis",
+      "QA",
+      "UX Reviews",
+      "Documentation & guides",
+    ],
+    enablement: [
+      "Figma",
+      "Canva",
+      "Framer",
+      "Cursor",
+      "ElevenLabs",
+    ],
   }
 
   return (
@@ -52,8 +84,7 @@ export default function HomePage() {
                 value.
               </p>
               <p>
-                Strengths include crisp roadmaps and execution, discovery and user research, demo‑ready POCs, integration‑
-                minded solution design, and clear documentation and enablement that drive adoption and time‑to‑value.
+                Strengths include crisp roadmaps and execution, discovery and user research, demo‑ready POCs, and clear documentation and enablement that drive adoption and time‑to‑value.
               </p>
             </div>
           </section>
@@ -83,7 +114,7 @@ export default function HomePage() {
                 </div>
               </div>
               <div>
-                <h3 className="text-lg font-medium mb-2">Enablement & Demos</h3>
+                <h3 className="text-lg font-medium mb-2">Design & Tools</h3>
                 <div className="flex flex-wrap gap-2">
                   {skills.enablement.map((skill) => (
                     <Badge key={skill} variant="outline" className="bg-primary/10 border-primary/20">
