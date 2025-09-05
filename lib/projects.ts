@@ -12,6 +12,17 @@ export interface Project {
 
 export const projects: Project[] = [
   {
+    id: "glosova",
+    title: "Glosova",
+    description: "A polished iOS language learning app built with SwiftUI, featuring AI-powered translation, speech synthesis, and a custom highlighting gesture interface.",
+    longDescription: "A comprehensive language learning iOS app built with SwiftUI that combines AI-powered translation via OpenAI, text-to-speech and speech-to-text through ElevenLabs APIs, and Google Auth with Supabase backend. Features a clean, polished UX with a custom-built highlighting gesture on UIKit TextView for an engaging learning experience.",
+    year: "2025",
+    tags: ["SwiftUI", "iOS", "AI/ML", "Supabase", "OpenAI API", "ElevenLabs", "UIKit"],
+    href: "/projects/glosova",
+    demoVideoUrl: "https://www.loom.com/share/9ba7dba5ea5244d4854e8c8f37008c04",
+    featured: true,
+  },
+  {
     id: "384snap",
     title: "384 Snap",
     description: "Led end-to-end product definition from roadmap and core UX to hands-on UI development in SwiftUI.",

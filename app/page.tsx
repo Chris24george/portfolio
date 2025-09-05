@@ -79,12 +79,10 @@ export default function HomePage() {
             <h2 className="text-2xl font-semibold mb-4">About</h2>
             <div className="space-y-2 text-muted-foreground">
               <p>
-                I’m a product professional with strong technical fluency who turns ambiguity into shipped outcomes. I work
-                closely with engineering, customers, and go‑to‑market teams to align problems, scope solutions, and deliver
-                value.
+                I'm a software engineer passionate about building great products. I take pride in writing clean, maintainable code that solves real problems and delivers value to users.
               </p>
               <p>
-                Strengths include crisp roadmaps and execution, discovery and user research, demo‑ready POCs, and clear documentation and enablement that drive adoption and time‑to‑value.
+                I thrive in collaborative environments and enjoy the entire development process. I'm equally comfortable diving deep into code architecture or rapidly prototyping ideas to validate concepts.
               </p>
             </div>
           </section>
