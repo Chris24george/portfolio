@@ -12,6 +12,17 @@ export interface Project {
 
 export const projects: Project[] = [
   {
+    id: "ai-translation-app",
+    title: "AI Translation Web App",
+    description: "A simple but effective translation web app built with Next.js and Vercel's AI SDK, featuring structured AI outputs with word-by-word breakdowns and grammar analysis.",
+    longDescription: "A simple but effective translation web app built with Next.js and Vercel's AI SDK that demonstrates prompt engineering and structured JSON AI outputs. Features phrase translation, word-by-word breakdown, phrase analysis, and grammar overview, with a clean UI using Framer Motion, Tailwind CSS, and Radix components.",
+    year: "2025",
+    tags: ["Next.js", "Vercel AI SDK", "Prompt Engineering", "Framer Motion", "Tailwind CSS", "Radix UI", "TypeScript"],
+    href: "/projects/ai-translation-app",
+    demoVideoUrl: "https://www.loom.com/share/b4adf8af905a467696b0b1b41710a820",
+    featured: true,
+  },
+  {
     id: "glosova",
     title: "Glosova",
     description: "A polished iOS language learning app built with SwiftUI, featuring AI-powered translation, speech synthesis, and a custom highlighting gesture interface.",
