@@ -7,25 +7,12 @@ import { ArrowLeft, ExternalLink, Play } from "lucide-react"
 import Link from "next/link"
 import { getProject } from "@/lib/projects"
 
-export default function GlosovaProjectPage() {
-  const project = getProject("glosova")
+export default function CalBoardProjectPage() {
+  const project = getProject("calboard")
   
   if (!project) {
     notFound()
   }
-
-  const demoVideos = [
-    {
-      title: "Core App Demo",
-      url: "https://www.loom.com/share/9ba7dba5ea5244d4854e8c8f37008c04",
-      description: "Overview of the main language learning features and user interface"
-    },
-    {
-      title: "Additional Features",
-      url: "https://www.loom.com/share/95c8161937b14f3bb4290e9f1f41acd2",
-      description: "Demonstration of advanced features and functionality"
-    }
-  ]
 
   return (
     <div className="pt-20 pb-8 md:pt-24 md:pb-16">
@@ -66,23 +53,21 @@ export default function GlosovaProjectPage() {
             </div>
           </div>
 
-          {/* Demo Videos */}
+          {/* Demo Video */}
           <section>
-            <h2 className="text-2xl font-semibold mb-4">Demo Videos</h2>
-            <div className="grid gap-4 md:grid-cols-2">
-              {demoVideos.map((video, index) => (
-                <div key={index} className="bg-card border border-border rounded-lg p-6">
-                  <h3 className="text-lg font-medium mb-2">{video.title}</h3>
-                  <p className="text-muted-foreground text-sm mb-4">{video.description}</p>
-                  <Button asChild size="sm">
-                    <Link href={video.url} target="_blank" rel="noopener noreferrer">
-                      <Play className="mr-2 h-4 w-4" />
-                      Watch Demo
-                      <ExternalLink className="ml-2 h-3 w-3" />
-                    </Link>
-                  </Button>
-                </div>
-              ))}
+            <h2 className="text-2xl font-semibold mb-4">Demo Video</h2>
+            <div className="bg-card border border-border rounded-lg p-6">
+              <h3 className="text-lg font-medium mb-2">App Demonstration</h3>
+              <p className="text-muted-foreground text-sm mb-4">
+                Watch how CalBoard displays real-time Caltrain schedules with a clean, minimalist interface
+              </p>
+              <Button asChild size="sm">
+                <Link href={project.demoVideoUrl!} target="_blank" rel="noopener noreferrer">
+                  <Play className="mr-2 h-4 w-4" />
+                  Watch Demo
+                  <ExternalLink className="ml-2 h-3 w-3" />
+                </Link>
+              </Button>
             </div>
           </section>
 
@@ -93,29 +78,40 @@ export default function GlosovaProjectPage() {
               <div>
                 <h3 className="text-lg font-medium text-foreground mb-2">Frontend & UI</h3>
                 <ul className="list-disc list-inside space-y-1">
-                  <li>Built with SwiftUI for native iOS performance and modern interface</li>
-                  <li>Custom highlighting gesture implementation using UIKit TextView</li>
-                  <li>Clean, polished user experience designed for language learning</li>
+                  <li>Built entirely with SwiftUI for native iOS performance</li>
+                  <li>Minimalist design focused on essential transit information</li>
+                  <li>Clean, readable interface optimized for quick reference</li>
+                  <li>Station selection with intuitive navigation</li>
                 </ul>
               </div>
               
               <div>
-                <h3 className="text-lg font-medium text-foreground mb-2">Backend & APIs</h3>
+                <h3 className="text-lg font-medium text-foreground mb-2">API Integration</h3>
                 <ul className="list-disc list-inside space-y-1">
-                  <li>Supabase backend for user data and content management</li>
-                  <li>Google Auth integration for secure user authentication</li>
-                  <li>OpenAI API integration for real-time translation capabilities</li>
-                  <li>ElevenLabs APIs for text-to-speech and speech-to-text functionality</li>
+                  <li>Direct integration with 511.org API for real-time transit data</li>
+                  <li>No proxy server needed for this demonstration app</li>
+                  <li>Efficient data parsing and display of timetable information</li>
+                  <li>Real-time updates of upcoming departures</li>
                 </ul>
               </div>
               
               <div>
                 <h3 className="text-lg font-medium text-foreground mb-2">Key Features</h3>
                 <ul className="list-disc list-inside space-y-1">
-                  <li>AI-powered translation and lesson generation</li>
-                  <li>Interactive highlighting for vocabulary selection</li>
-                  <li>Save words and phrases for later review</li>
-                  <li>Flashcard system for practicing saved vocabulary</li>
+                  <li>Station-specific Caltrain schedule lookup</li>
+                  <li>Real-time departure information</li>
+                  <li>Simple, intuitive station selection interface</li>
+                  <li>Focused on solving a specific transit problem effectively</li>
+                </ul>
+              </div>
+              
+              <div>
+                <h3 className="text-lg font-medium text-foreground mb-2">Project Context</h3>
+                <ul className="list-disc list-inside space-y-1">
+                  <li>Created to address lack of simple Caltrain schedule apps</li>
+                  <li>Demonstrates frontend development skills in iOS/SwiftUI</li>
+                  <li>Focus on user experience and practical utility</li>
+                  <li>Never published to App Store - proof of concept and skill demonstration</li>
                 </ul>
               </div>
             </div>

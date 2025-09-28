@@ -1,5 +1,6 @@
 "use client"
 
+import { useState } from "react"
 import Link from "next/link"
 import Image from "next/image"
 import { Button } from "@/components/ui/button"
@@ -49,6 +50,11 @@ export default function HomePage() {
     ],
   }
 
+  const [showTech, setShowTech] = useState(false)
+  const [showProduct, setShowProduct] = useState(false)
+  const [showEnablement, setShowEnablement] = useState(false)
+  const maxVisibleSkills = 8
+
   return (
     <div className="pt-20 pb-8 md:pt-24 md:pb-16 relative">
       <div className="absolute inset-0 bg-dot-pattern opacity-50 -z-10" />
@@ -61,8 +67,7 @@ export default function HomePage() {
             </div>
             <h1 className="text-4xl md:text-5xl font-bold tracking-tight mb-2">Christopher George</h1>
             <p className="text-xl text-muted-foreground max-w-2xl mx-auto mb-6">
-              I build and ship products end‑to‑end—clarity from ambiguity, credible demos/POCs, and hands‑on code when it
-              moves the work forward.
+              Software engineer proficient in web and iOS development. Always learning new things.
             </p>
             <div className="flex items-center justify-center space-x-6 text-muted-foreground">
               <Link href="https://github.com/Chris24george" className="hover:text-primary transition-colors">
@@ -71,56 +76,6 @@ export default function HomePage() {
               <Link href="https://www.linkedin.com/in/chris24george/" className="hover:text-primary transition-colors">
                 <Linkedin className="h-5 w-5" />
               </Link>
-            </div>
-          </section>
-
-          {/* About */}
-          <section>
-            <h2 className="text-2xl font-semibold mb-4">About</h2>
-            <div className="space-y-2 text-muted-foreground">
-              <p>
-                I'm a software engineer passionate about building great products. I take pride in writing clean, maintainable code that solves real problems and delivers value to users.
-              </p>
-              <p>
-                I thrive in collaborative environments and enjoy the entire development process. I'm equally comfortable diving deep into code architecture or rapidly prototyping ideas to validate concepts.
-              </p>
-            </div>
-          </section>
-
-          {/* Skills */}
-          <section>
-            <h2 className="text-2xl font-semibold mb-4">Skills</h2>
-            <div className="grid md:grid-cols-3 gap-4">
-              <div>
-                <h3 className="text-lg font-medium mb-2">Technical</h3>
-                <div className="flex flex-wrap gap-2">
-                  {skills.technical.map((skill) => (
-                    <Badge key={skill} variant="outline" className="bg-primary/10 border-primary/20">
-                      {skill}
-                    </Badge>
-                  ))}
-                </div>
-              </div>
-              <div>
-                <h3 className="text-lg font-medium mb-2">Product</h3>
-                <div className="flex flex-wrap gap-2">
-                  {skills.product.map((skill) => (
-                    <Badge key={skill} variant="outline" className="bg-primary/10 border-primary/20">
-                      {skill}
-                    </Badge>
-                  ))}
-                </div>
-              </div>
-              <div>
-                <h3 className="text-lg font-medium mb-2">Design & Tools</h3>
-                <div className="flex flex-wrap gap-2">
-                  {skills.enablement.map((skill) => (
-                    <Badge key={skill} variant="outline" className="bg-primary/10 border-primary/20">
-                      {skill}
-                    </Badge>
-                  ))}
-                </div>
-              </div>
             </div>
           </section>
 
@@ -145,6 +100,97 @@ export default function HomePage() {
                   tags={project.tags}
                 />
               ))}
+            </div>
+          </section>
+
+          {/* Skills */}
+          <section>
+            <h2 className="text-2xl font-semibold mb-4">Skills</h2>
+            <div className="grid md:grid-cols-3 gap-4">
+              <div>
+                <h3 className="text-lg font-medium mb-2">Technical</h3>
+                <div className="flex flex-wrap gap-2">
+                  {(showTech ? skills.technical : skills.technical.slice(0, maxVisibleSkills)).map((skill) => (
+                    <Badge key={skill} variant="outline" className="bg-primary/10 border-primary/20">
+                      {skill}
+                    </Badge>
+                  ))}
+                  {skills.technical.length > maxVisibleSkills && (
+                    <Badge
+                      variant="outline"
+                      className="bg-primary/10 border-primary/20 cursor-pointer select-none"
+                      role="button"
+                      tabIndex={0}
+                      aria-expanded={showTech}
+                      onClick={() => setShowTech(!showTech)}
+                      onKeyDown={(e) => {
+                        if (e.key === "Enter" || e.key === " ") {
+                          e.preventDefault()
+                          setShowTech(!showTech)
+                        }
+                      }}
+                    >
+                      {showTech ? "Show less" : `+${skills.technical.length - maxVisibleSkills} more`}
+                    </Badge>
+                  )}
+                </div>
+              </div>
+              <div>
+                <h3 className="text-lg font-medium mb-2">Product</h3>
+                <div className="flex flex-wrap gap-2">
+                  {(showProduct ? skills.product : skills.product.slice(0, maxVisibleSkills)).map((skill) => (
+                    <Badge key={skill} variant="outline" className="bg-primary/10 border-primary/20">
+                      {skill}
+                    </Badge>
+                  ))}
+                  {skills.product.length > maxVisibleSkills && (
+                    <Badge
+                      variant="outline"
+                      className="bg-primary/10 border-primary/20 cursor-pointer select-none"
+                      role="button"
+                      tabIndex={0}
+                      aria-expanded={showProduct}
+                      onClick={() => setShowProduct(!showProduct)}
+                      onKeyDown={(e) => {
+                        if (e.key === "Enter" || e.key === " ") {
+                          e.preventDefault()
+                          setShowProduct(!showProduct)
+                        }
+                      }}
+                    >
+                      {showProduct ? "Show less" : `+${skills.product.length - maxVisibleSkills} more`}
+                    </Badge>
+                  )}
+                </div>
+              </div>
+              <div>
+                <h3 className="text-lg font-medium mb-2">Design & Tools</h3>
+                <div className="flex flex-wrap gap-2">
+                  {(showEnablement ? skills.enablement : skills.enablement.slice(0, maxVisibleSkills)).map((skill) => (
+                    <Badge key={skill} variant="outline" className="bg-primary/10 border-primary/20">
+                      {skill}
+                    </Badge>
+                  ))}
+                  {skills.enablement.length > maxVisibleSkills && (
+                    <Badge
+                      variant="outline"
+                      className="bg-primary/10 border-primary/20 cursor-pointer select-none"
+                      role="button"
+                      tabIndex={0}
+                      aria-expanded={showEnablement}
+                      onClick={() => setShowEnablement(!showEnablement)}
+                      onKeyDown={(e) => {
+                        if (e.key === "Enter" || e.key === " ") {
+                          e.preventDefault()
+                          setShowEnablement(!showEnablement)
+                        }
+                      }}
+                    >
+                      {showEnablement ? "Show less" : `+${skills.enablement.length - maxVisibleSkills} more`}
+                    </Badge>
+                  )}
+                </div>
+              </div>
             </div>
           </section>
         </div>

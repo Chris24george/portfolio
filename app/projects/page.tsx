@@ -43,9 +43,6 @@ export default function ProjectsPage() {
           {/* Header */}
           <div className="text-center mb-12">
             <h1 className="text-4xl md:text-5xl font-bold tracking-tight mb-4">Projects</h1>
-            <p className="text-xl text-muted-foreground">
-              Selected work spanning product, solutions engineering, and product specialist domains
-            </p>
           </div>
 
           {/* Projects */}

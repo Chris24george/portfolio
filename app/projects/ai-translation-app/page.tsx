@@ -165,6 +165,16 @@ export default function AITranslationAppProjectPage() {
             </div>
           </section>
         </div>
+
+        {/* CTA */}
+        <div className="mt-16 text-center">
+          <Button asChild size="lg" className="rounded-full px-8 shadow-lg">
+            <Link href="/projects">
+              Explore More Projects
+              <ExternalLink className="ml-2 h-4 w-4" />
+            </Link>
+          </Button>
+        </div>
       </div>
     </div>
   )
